@@ -1,7 +1,7 @@
 #include "MODULE_4_20MA.h"
 
 void MODULE_4_20MA::writeBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
-                              uint8_t length) {
+                               uint8_t length) {
     _wire->beginTransmission(addr);
     _wire->write(reg);
     for (int i = 0; i < length; i++) {
@@ -11,7 +11,7 @@ void MODULE_4_20MA::writeBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
 }
 
 void MODULE_4_20MA::readBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
-                             uint8_t length) {
+                              uint8_t length) {
     uint8_t index = 0;
     _wire->beginTransmission(addr);
     _wire->write(reg);
@@ -23,7 +23,7 @@ void MODULE_4_20MA::readBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
 }
 
 bool MODULE_4_20MA::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl,
-                         uint32_t speed) {
+                          uint32_t speed) {
     _wire  = wire;
     _addr  = addr;
     _sda   = sda;
@@ -37,13 +37,12 @@ bool MODULE_4_20MA::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl,
         return true;
     } else {
         return false;
-    }     
+    }
 }
 
 uint16_t MODULE_4_20MA::getADC12BitsValue(uint8_t channel) {
     uint8_t data[4];
-    if (channel > 3)
-        return 0;
+    if (channel > 3) return 0;
     uint8_t reg = channel * 2 + MODULE_4_20MA_ADC_12BIT_REG;
     readBytes(_addr, reg, data, 2);
     uint32_t value = data[0] | (data[1] << 8);
@@ -52,8 +51,7 @@ uint16_t MODULE_4_20MA::getADC12BitsValue(uint8_t channel) {
 
 uint8_t MODULE_4_20MA::getADC8BitsValue(uint8_t channel) {
     uint8_t data[4];
-    if (channel > 3)
-        return 0;
+    if (channel > 3) return 0;
     uint8_t reg = channel + MODULE_4_20MA_ADC_8BIT_REG;
     readBytes(_addr, reg, data, 1);
     uint32_t value = data[0] | (data[1] << 8);
@@ -62,8 +60,7 @@ uint8_t MODULE_4_20MA::getADC8BitsValue(uint8_t channel) {
 
 uint16_t MODULE_4_20MA::getCurrentValue(uint8_t channel) {
     uint8_t data[4];
-    if (channel > 3)
-        return 0;
+    if (channel > 3) return 0;
     uint8_t reg = channel * 2 + MODULE_4_20MA_CURRENT_REG;
     readBytes(_addr, reg, data, 2);
     uint32_t value = data[0] | (data[1] << 8);
@@ -83,7 +80,7 @@ uint8_t MODULE_4_20MA::setI2CAddress(uint8_t addr) {
     _wire->beginTransmission(_addr);
     _wire->write(I2C_ADDRESS_REG);
     _wire->write(addr);
-    _wire->endTransmission();    
+    _wire->endTransmission();
     _addr = addr;
     return _addr;
 }
@@ -91,11 +88,11 @@ uint8_t MODULE_4_20MA::setI2CAddress(uint8_t addr) {
 uint8_t MODULE_4_20MA::getI2CAddress(void) {
     _wire->beginTransmission(_addr);
     _wire->write(I2C_ADDRESS_REG);
-    _wire->endTransmission();  
+    _wire->endTransmission();
 
     uint8_t RegValue;
 
-    _wire->requestFrom(_addr, 1); 
+    _wire->requestFrom(_addr, 1);
     RegValue = Wire.read();
     return RegValue;
 }
@@ -103,11 +100,11 @@ uint8_t MODULE_4_20MA::getI2CAddress(void) {
 uint8_t MODULE_4_20MA::getFirmwareVersion(void) {
     _wire->beginTransmission(_addr);
     _wire->write(FIRMWARE_VERSION_REG);
-    _wire->endTransmission();  
+    _wire->endTransmission();
 
     uint8_t RegValue;
 
-    _wire->requestFrom(_addr, 1); 
+    _wire->requestFrom(_addr, 1);
     RegValue = Wire.read();
     return RegValue;
 }

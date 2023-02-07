@@ -4,13 +4,13 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-#define MODULE_4_20MA_ADDR                        0x55
-#define MODULE_4_20MA_ADC_12BIT_REG               0x00
-#define MODULE_4_20MA_ADC_8BIT_REG                0x10
-#define MODULE_4_20MA_CURRENT_REG                 0x20
-#define MODULE_4_20MA_CAL_REG                     0x30
-#define FIRMWARE_VERSION_REG                      0xFE
-#define I2C_ADDRESS_REG                           0xFF
+#define MODULE_4_20MA_ADDR          0x55
+#define MODULE_4_20MA_ADC_12BIT_REG 0x00
+#define MODULE_4_20MA_ADC_8BIT_REG  0x10
+#define MODULE_4_20MA_CURRENT_REG   0x20
+#define MODULE_4_20MA_CAL_REG       0x30
+#define FIRMWARE_VERSION_REG        0xFE
+#define I2C_ADDRESS_REG             0xFF
 
 class MODULE_4_20MA {
    private:
@@ -29,7 +29,7 @@ class MODULE_4_20MA {
     uint16_t getADC12BitsValue(uint8_t channel);
     uint8_t getADC8BitsValue(uint8_t channel);
     uint16_t getCurrentValue(uint8_t channel);
-    void setCalCurrent(uint8_t index, uint16_t value);   
+    void setCalCurrent(uint8_t index, uint16_t value);
     uint8_t setI2CAddress(uint8_t addr);
     uint8_t getI2CAddress(void);
 };
