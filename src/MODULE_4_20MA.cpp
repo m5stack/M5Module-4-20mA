@@ -74,6 +74,7 @@ void MODULE_4_20MA::setCalCurrent(uint8_t index, uint16_t value) {
     data[0] = (value & 0xff);
     data[1] = ((value >> 8) & 0xff);
     writeBytes(_addr, reg, data, 2);
+    delay(500);
 }
 
 uint8_t MODULE_4_20MA::setI2CAddress(uint8_t addr) {
@@ -107,4 +108,10 @@ uint8_t MODULE_4_20MA::getFirmwareVersion(void) {
     _wire->requestFrom(_addr, 1);
     RegValue = Wire.read();
     return RegValue;
+}
+
+void MODULE_4_20MA::jumpBootloader(void) {
+    uint8_t value = 1;
+
+    writeBytes(_addr, JUMP_TO_BOOTLOADER_REG, (uint8_t *)&value, 1);
 }

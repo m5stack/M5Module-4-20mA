@@ -9,6 +9,7 @@
 #define MODULE_4_20MA_ADC_8BIT_REG  0x10
 #define MODULE_4_20MA_CURRENT_REG   0x20
 #define MODULE_4_20MA_CAL_REG       0x30
+#define JUMP_TO_BOOTLOADER_REG      0xFD
 #define FIRMWARE_VERSION_REG        0xFE
 #define I2C_ADDRESS_REG             0xFF
 
@@ -32,6 +33,7 @@ class MODULE_4_20MA {
     void setCalCurrent(uint8_t index, uint16_t value);
     uint8_t setI2CAddress(uint8_t addr);
     uint8_t getI2CAddress(void);
+    void jumpBootloader(void);
 };
 
 #endif
