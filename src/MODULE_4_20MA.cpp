@@ -49,15 +49,6 @@ uint16_t MODULE_4_20MA::getADC12BitsValue(uint8_t channel) {
     return value;
 }
 
-uint8_t MODULE_4_20MA::getADC8BitsValue(uint8_t channel) {
-    uint8_t data[4];
-    if (channel > 3) return 0;
-    uint8_t reg = channel + MODULE_4_20MA_ADC_8BIT_REG;
-    readBytes(_addr, reg, data, 1);
-    uint32_t value = data[0] | (data[1] << 8);
-    return value;
-}
-
 uint16_t MODULE_4_20MA::getCurrentValue(uint8_t channel) {
     uint8_t data[4];
     if (channel > 3) return 0;
@@ -108,10 +99,4 @@ uint8_t MODULE_4_20MA::getFirmwareVersion(void) {
     _wire->requestFrom(_addr, 1);
     RegValue = Wire.read();
     return RegValue;
-}
-
-void MODULE_4_20MA::jumpBootloader(void) {
-    uint8_t value = 1;
-
-    writeBytes(_addr, JUMP_TO_BOOTLOADER_REG, (uint8_t *)&value, 1);
 }

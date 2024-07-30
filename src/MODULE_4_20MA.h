@@ -6,10 +6,8 @@
 
 #define MODULE_4_20MA_ADDR          0x55
 #define MODULE_4_20MA_ADC_12BIT_REG 0x00
-#define MODULE_4_20MA_ADC_8BIT_REG  0x10
 #define MODULE_4_20MA_CURRENT_REG   0x20
 #define MODULE_4_20MA_CAL_REG       0x30
-#define JUMP_TO_BOOTLOADER_REG      0xFD
 #define FIRMWARE_VERSION_REG        0xFE
 #define I2C_ADDRESS_REG             0xFF
 
@@ -28,12 +26,10 @@ class MODULE_4_20MA {
                uint8_t sda = 21, uint8_t scl = 22, uint32_t speed = 100000L);
     uint8_t getFirmwareVersion(void);
     uint16_t getADC12BitsValue(uint8_t channel);
-    uint8_t getADC8BitsValue(uint8_t channel);
     uint16_t getCurrentValue(uint8_t channel);
     void setCalCurrent(uint8_t index, uint16_t value);
     uint8_t setI2CAddress(uint8_t addr);
     uint8_t getI2CAddress(void);
-    void jumpBootloader(void);
 };
 
 #endif
