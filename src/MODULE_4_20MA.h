@@ -28,6 +28,7 @@ class MODULE_4_20MA {
     uint16_t getADC12BitsValue(uint8_t channel);
     uint16_t getCurrentValue(uint8_t channel);
     void setCalCurrent(uint8_t index, uint16_t value);
+    uint16_t getCalCurrent(uint8_t channel);
     uint8_t setI2CAddress(uint8_t addr);
     uint8_t getI2CAddress(void);
 };

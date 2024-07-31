@@ -10,18 +10,6 @@ void MODULE_4_20MA::writeBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
     _wire->endTransmission();
 }
 
-void MODULE_4_20MA::readBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
-                              uint8_t length) {
-    uint8_t index = 0;
-    _wire->beginTransmission(addr);
-    _wire->write(reg);
-    _wire->endTransmission(false);
-    _wire->requestFrom(addr, length);
-    for (int i = 0; i < length; i++) {
-        buffer[index++] = _wire->read();
-    }
-}
-
 bool MODULE_4_20MA::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl,
                           uint32_t speed) {
     _wire  = wire;
@@ -40,6 +28,18 @@ bool MODULE_4_20MA::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl,
     }
 }
 
+void MODULE_4_20MA::readBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
+                              uint8_t length) {
+    uint8_t index = 0;
+    _wire->beginTransmission(addr);
+    _wire->write(reg);
+    _wire->endTransmission(false);
+    _wire->requestFrom(addr, length);
+    for (int i = 0; i < length; i++) {
+        buffer[index++] = _wire->read();
+    }
+}
+
 uint16_t MODULE_4_20MA::getADC12BitsValue(uint8_t channel) {
     uint8_t data[4];
     if (channel > 3) return 0;
@@ -53,6 +53,15 @@ uint16_t MODULE_4_20MA::getCurrentValue(uint8_t channel) {
     uint8_t data[4];
     if (channel > 3) return 0;
     uint8_t reg = channel * 2 + MODULE_4_20MA_CURRENT_REG;
+    readBytes(_addr, reg, data, 2);
+    uint32_t value = data[0] | (data[1] << 8);
+    return value;
+}
+
+uint16_t MODULE_4_20MA::getCalCurrent(uint8_t channel) {
+    uint8_t data[4];
+    if (channel > 3) return 0;
+    uint8_t reg = channel * 2 + MODULE_4_20MA_CAL_REG;
     readBytes(_addr, reg, data, 2);
     uint32_t value = data[0] | (data[1] << 8);
     return value;
