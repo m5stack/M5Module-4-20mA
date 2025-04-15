@@ -1,3 +1,9 @@
+/*
+ *SPDX-FileCopyrightText: 2025 M5Stack Technology CO LTD
+ *
+ *SPDX-License-Identifier: MIT
+ */
+
 #include "MODULE_4_20MA.h"
 
 void MODULE_4_20MA::writeBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
@@ -58,18 +64,9 @@ uint16_t MODULE_4_20MA::getCurrentValue(uint8_t channel) {
     return value;
 }
 
-uint16_t MODULE_4_20MA::getCalCurrent(uint8_t channel) {
+void MODULE_4_20MA::setCalCurrent(uint8_t channel, uint16_t value) {
     uint8_t data[4];
-    if (channel > 3) return 0;
-    uint8_t reg = channel * 2 + MODULE_4_20MA_CAL_REG;
-    readBytes(_addr, reg, data, 2);
-    uint32_t value = data[0] | (data[1] << 8);
-    return value;
-}
-
-void MODULE_4_20MA::setCalCurrent(uint8_t index, uint16_t value) {
-    uint8_t data[4];
-    uint8_t reg = MODULE_4_20MA_CAL_REG + index * 2;
+    uint8_t reg = MODULE_4_20MA_CAL_REG + channel * 2;
 
     data[0] = (value & 0xff);
     data[1] = ((value >> 8) & 0xff);

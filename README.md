@@ -6,7 +6,8 @@ Contains case programs of M5Stack MODULE 4_20MA.
 
 ## Related Link
 
-- [Document - MODULE 4_20MA](https://github.com/m5stack/M5Module-4-20mA)
+- [Document - MODULE 4_20MA](https://docs.m5stack.com/en/module/AIN4-20mA%20Module%2013.2)
+- [Document - Unit AIN4-20mA](https://docs.m5stack.com/en/unit/AIN4-20mA%20Unit)
 
 ## License
 

@@ -1,3 +1,9 @@
+/*
+ *SPDX-FileCopyrightText: 2025 M5Stack Technology CO LTD
+ *
+ *SPDX-License-Identifier: MIT
+ */
+
 #ifndef __MODULE_4_20MA_H
 #define __MODULE_4_20MA_H
 
@@ -27,8 +33,7 @@ class MODULE_4_20MA {
     uint8_t getFirmwareVersion(void);
     uint16_t getADC12BitsValue(uint8_t channel);
     uint16_t getCurrentValue(uint8_t channel);
-    void setCalCurrent(uint8_t index, uint16_t value);
-    uint16_t getCalCurrent(uint8_t channel);
+    void setCalCurrent(uint8_t channel, uint16_t value);
     uint8_t setI2CAddress(uint8_t addr);
     uint8_t getI2CAddress(void);
 };

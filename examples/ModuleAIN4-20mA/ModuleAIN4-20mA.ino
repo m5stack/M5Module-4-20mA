@@ -1,3 +1,17 @@
+/*
+ * SPDX-FileCopyrightText: 2025 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*
+ * @Hardwares: Basic/Fire/Gray(PortA) + Module AIN4-20mA
+ * @Dependent Library:
+ * M5GFX: https://github.com/m5stack/M5GFX
+ * M5Unified: https://github.com/m5stack/M5Unified
+ * M5Module-4-20mA:https://github.com/m5stack/M5Module-4-20mA
+ */
+
 #include <M5Stack.h>
 #include "MODULE_4_20MA.h"
 #include <M5GFX.h>
